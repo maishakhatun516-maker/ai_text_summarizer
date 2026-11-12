@@ -1,0 +1,32 @@
+
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import summarizeRoutes from "./routes/summarizeRoutes.js";
+
+dotenv.config();
+
+const app = express();
+
+// Middleware
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
+
+app.use(express.json({ limit: "1mb" }));
+
+// API Routes
+app.use("/api", summarizeRoutes);
+
+// Test route
+app.get("/", (req, res) => {
+  res.send("AI Text Summarizer Backend is Running!");
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
