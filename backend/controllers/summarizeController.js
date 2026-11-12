@@ -54,11 +54,11 @@ export const summarizeText = async (req, res) => {
     });
 
   } catch (error) {
-  console.error("Summarization Error:", error);
+    console.error("Summarization Error:", error);
 
     return res.status(500).json({
       success: false,
-      message: "Failed to summarize text. Please try again.",
+      message: error.message || "Failed to summarize text. Please try again.",
     });
   }
 };
